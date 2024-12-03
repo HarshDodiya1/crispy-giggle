@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "crispy-giggle",
-    "slug": "crispy-giggle",
+    "name": "Aora",
+    "slug": "aora",
     "version": "1.0.0",
+    "scheme": "aora",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -23,6 +24,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
