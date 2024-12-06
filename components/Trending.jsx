@@ -4,23 +4,17 @@ import React from "react";
 const Trending = ({ posts }) => {
   return (
     <FlatList
-      data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+      data={posts}
+      horizontal
       keyExtractor={(item) => item.$id}
       renderItem={({ item }) => (
-        <Text className="text-3xl text-white">{item.id}</Text>
+        <TrendingItem activeItem={activeItem} item={item} />
       )}
-      horizontal
-      //   data={posts}
-      //   horizontal
-      //   keyExtractor={(item) => item.$id}
-      //   renderItem={({ item }) => (
-      //     <TrendingItem activeItem={activeItem} item={item} />
-      //   )}
-      //   onViewableItemsChanged={viewableItemsChanged}
-      //   viewabilityConfig={{
-      //     itemVisiblePercentThreshold: 70,
-      //   }}
-      //   contentOffset={{ x: 170 }}
+      onViewableItemsChanged={viewableItemsChanged}
+      viewabilityConfig={{
+        itemVisiblePercentThreshold: 70,
+      }}
+      contentOffset={{ x: 170 }}
     />
   );
 };
