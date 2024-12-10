@@ -1,9 +1,9 @@
+import { useEvent } from "expo";
 import { useState } from "react";
-import { useVideoPlayer, VideoPlayer, VideoView } from "expo-video";
-
 import { Image, ImageBackground, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 
+import { useVideoPlayer, VideoView } from "expo-video";
 import { icons } from "../constants";
 
 const zoomIn = {
@@ -26,13 +26,19 @@ const zoomOut = {
 
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
-
-  const URL = "https://player.vimeo.com/video/949582778?h=d60220d68d";
-  const videoPlayer = useVideoPlayer(item.video, (player) => {
-    player.loop = true;
+  const player = useVideoPlayer(item.video, (player) => {
+    player.loop = false;
     player.play();
-    // player.setContentFit(VideoContentFit.Contain);
   });
+
+  const { didJustFinish } = useEvent(player, "statusChange", {
+    didJustFinish: player.status?.didJustFinish,
+  });
+
+  // Stop playback when video finishes
+  if (didJustFinish) {
+    setPlay(false);
+  }
 
   return (
     <Animatable.View
@@ -42,12 +48,11 @@ const TrendingItem = ({ activeItem, item }) => {
     >
       {play ? (
         <VideoView
-          player={videoPlayer}
-          contentFit="contain"
-          nativeControls
+          player={player}
           className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
+          contentFit="contain"
           allowsFullscreen
-          allowsPictureInPicture
+          nativeControls
         />
       ) : (
         <TouchableOpacity
