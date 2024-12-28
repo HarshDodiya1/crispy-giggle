@@ -1,4 +1,4 @@
-# 🌐 AORA: The Video Uploading Platoform
+# 🌐 AORA: The Video Uploading Platform
 
 <div align="center">
   <br />
